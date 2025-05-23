@@ -1,5 +1,5 @@
 # Password-Generator
-web app link :- https://password-generator-9dgt.onrender.com
+web app link :- https://password-generator-5ixc.onrender.com
 
 (When using this this web app, in between you reload the page it will reload but will perform the last previous task you have done keep in mind that, if you havn't done anything just open the web app and doing reload it will just reload it)
 
