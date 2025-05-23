@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Password Generator</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>PASSWORD GENERATOR</h1>
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        <form method="post" autocomplete="off">
+            <div class="output-row">
+                <input type="text" id="password-output" name="password" value="{{ password or '' }}" readonly placeholder="PASSWORD GENERATED">
+                <button type="button" class="copy-btn" id="copy-btn" title="Copy to clipboard">📋</button>
+            </div>
+            {% if password %}
+                <div class="strength-label">Strength: <b>{{ strength }}</b></div>
+                <div class="strength-bar-outer">
+                    <div class="strength-bar-inner" style="width: {{ strength_percent }}%; background: {{ strength_color }};"></div>
+                </div>
+            {% endif %}
+            <label>Password Length:
+                <input type="number" name="length" min="8" max="32" value="{{ length or 12 }}">
+            </label>
+            <label><input type="checkbox" name="uppercase" {% if uppercase %}checked{% endif %}> Uppercase</label>
+            <label><input type="checkbox" name="lowercase" {% if lowercase %}checked{% endif %}> Lowercase</label>
+            <label><input type="checkbox" name="numbers" {% if numbers %}checked{% endif %}> Numbers</label>
+            <label><input type="checkbox" name="special" {% if special %}checked{% endif %}> Symbols</label>
+            <button type="submit" class="main-btn">GENERATE PASSWORD</button>
+        </form>
+        {% if history and history|length > 0 %}
+        <div class="history-section">
+            <h3>Password History</h3>
+            <ul class="history-list">
+                {% for item in history %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+    document.getElementById('copy-btn').onclick = function() {
+        var pwd = document.getElementById('password-output');
+        if (pwd.value) {
+            navigator.clipboard.writeText(pwd.value);
+            if (!document.getElementById('copied-msg')) {
+                var msg = document.createElement('span');
+                msg.className = 'copied-msg';
+                msg.id = 'copied-msg';
+                msg.innerText = 'Copied!';
+                this.parentNode.appendChild(msg);
+                setTimeout(function(){ msg.remove(); }, 1200);
+            }
+        }
+    };
+    </script>
+</body>
+</html> 
