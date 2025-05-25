@@ -9,7 +9,7 @@ A modern, responsive web application for generating secure passwords with custom
 
 ## Features
 
-- Generate secure passwords with customizable length
+- Generate secure passwords with customizable length (8-32)
 - Choose character types (uppercase, lowercase, numbers, special characters)
 - Password strength indicator
 - Copy to clipboard functionality
